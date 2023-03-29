@@ -1,5 +1,6 @@
 package com.crud.treinando.domain.Curso;
 
+import com.crud.treinando.domain.Professor.Professor;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,6 +20,8 @@ public class Curso {
     private String descricao;
 
     private BigDecimal preco;
+    @ManyToOne
+    private Professor professor;
 
     @Deprecated
     public Curso() {

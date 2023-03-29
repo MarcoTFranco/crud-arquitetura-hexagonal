@@ -1,9 +1,7 @@
 package com.crud.treinando.domain.Professor;
 
 import com.crud.treinando.domain.Curso.Curso;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +10,14 @@ import java.util.List;
 @Table(name = "tb_professor")
 public class Professor {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private Integer idade;
     private String sexo;
     private String cep;
-    @ManyToOne
+    @OneToMany(mappedBy = "professor")
     private List<Curso> cursos = new ArrayList<>();
 
     @Deprecated
