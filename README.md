@@ -1,5 +1,10 @@
 # CRUD — Arquitetura Hexagonal com Spring Boot
 
+> **Projeto de aprendizado.** Peguei um CRUD simples que havia desenvolvido anteriormente
+> e estou refatorando de forma incremental para aplicar na prática conceitos como
+> arquitetura hexagonal, boas práticas Spring Boot, testes e segurança.
+> O objetivo não é um produto final, mas documentar a evolução e consolidar o conhecimento.
+
 API REST de gerenciamento de alunos e cursos, construída com Java 17 e Spring Boot 3,
 aplicando os princípios da **arquitetura hexagonal (Ports & Adapters)** para separar
 o núcleo de negócio dos detalhes de infraestrutura.
@@ -95,7 +100,9 @@ Todos os erros retornam o mesmo contrato JSON:
 
 ---
 
-## Decisões técnicas
+## Decisões planejadas
+
+Princípios de design que guiam a evolução do projeto — alguns já aplicados parcialmente, outros previstos no roadmap.
 
 ### Tratamento global de exceções com `@ControllerAdvice`
 
@@ -105,9 +112,15 @@ sempre receba um body JSON consistente — nunca um stack trace exposto.
 
 ### Constructor injection
 
-As dependências são injetadas via construtor, não via `@Autowired` em campo.
+As dependências serão injetadas via construtor, não via `@Autowired` em campo.
 Isso torna as classes testáveis sem reflection, deixa as dependências explícitas
 na assinatura e respeita a imutabilidade dos campos.
+
+### Interfaces de porta (Ports & Adapters)
+
+Cada camada se comunica através de interfaces, nunca de implementações concretas.
+O `Service` dependerá de `PersistencePort`, não de `JpaRepository` diretamente —
+permitindo trocar a persistência sem tocar na lógica de negócio.
 
 ### DTOs em todas as camadas
 
@@ -117,23 +130,25 @@ do banco evolua sem quebrar os clientes.
 
 ### Paginação com `Pageable`
 
-Os endpoints de listagem aceitam parâmetros de paginação e ordenação:
+Os endpoints de listagem aceitarão parâmetros de paginação e ordenação:
 
 ```
 GET /api/v1/alunos?page=0&size=10&sort=nome,asc
 ```
 
-### Testes unitários com Mockito
+### Testes unitários e de integração
 
-Os serviços são testados de forma isolada com mocks do repositório,
-cobrindo os caminhos de sucesso e os casos de erro (recurso não encontrado,
-dados inválidos).
+Os serviços serão testados de forma isolada com mocks (JUnit 5 + Mockito),
+e os adapters de persistência com banco real via Testcontainers — cobrindo
+o que mocks não conseguem garantir.
 
 ---
 
 ## Roadmap de Evolução
 
 Evolução incremental do projeto, com cada passo desenvolvido em branch separada.
+
+### Fundamentos Spring Boot
 
 - [ ] **Passo 1** — Status codes e header `Location` no POST (`201 Created`)
 - [ ] **Passo 2** — Tratamento global de exceções com `@ControllerAdvice`
@@ -143,3 +158,23 @@ Evolução incremental do projeto, com cada passo desenvolvido em branch separad
 - [ ] **Passo 6** — Paginação nos endpoints de listagem
 - [ ] **Passo 7** — Testes unitários com JUnit 5 + Mockito
 - [ ] **Passo 8** — Revisão e limpeza de dependências do `pom.xml`
+
+### Arquitetura Hexagonal de Verdade
+
+- [ ] **Passo 9** — Interfaces de porta (`UseCase` + `PersistencePort`) para inversão real de dependência — sem elas o projeto é apenas camadas, não hexagonal
+- [ ] **Passo 10** — Exceções de domínio customizadas (`ResourceNotFoundException`, `BusinessException`) para substituir `Assert` e erros genéricos nos Services
+- [ ] **Passo 11** — Completar CRUD de `Curso` (faltam `findById`, `update`, `delete`) e corrigir `CursoController` para retornar `CursoResponse` em vez da entidade JPA diretamente
+- [ ] **Passo 12** — Implementar `Professor` do zero: Controller, Service, portas e CRUD completo (entidade existe no domínio mas não tem nenhum endpoint)
+
+### Qualidade e Robustez
+
+- [ ] **Passo 13** — Testes de integração com `@SpringBootTest` + Testcontainers (MySQL real em container) para cobrir o que Mockito não garante
+- [ ] **Passo 14** — Migração de banco com Flyway: substituir `ddl-auto=create` por scripts SQL versionados (`V1__create_tables.sql`)
+- [ ] **Passo 15** — Documentação automática da API com SpringDoc OpenAPI (Swagger UI em `/swagger-ui.html`)
+- [ ] **Passo 16** — Mapper explícito para conversão entre camadas (`AlunoMapper`, `CursoMapper`) eliminando o acoplamento onde `AlunoRequest.toModel()` chama `AlunoService`
+
+### Segurança e Produção
+
+- [ ] **Passo 17** — Autenticação e autorização com Spring Security + JWT
+- [ ] **Passo 18** — Auditoria automática de entidades com `@CreatedDate` e `@LastModifiedDate` (Spring Data Auditing)
+- [ ] **Passo 19** — Profiles de ambiente (`dev`, `prod`) com configurações separadas via `application-{profile}.yml`
