@@ -7,7 +7,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController()
@@ -22,7 +24,12 @@ public class AlunoController {
         Aluno aluno = request.toModel(alunoService);
         alunoService.insert(aluno);
         AlunoResponse alunoResponse = new AlunoResponse(aluno);
-        return ResponseEntity.ok().body(alunoResponse);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(aluno.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(alunoResponse);
     }
 
     @GetMapping(value = "/{id}")
@@ -48,6 +55,5 @@ public class AlunoController {
         alunoService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 
 }
