@@ -6,7 +6,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -20,7 +22,12 @@ public class CursoController {
     public ResponseEntity<Curso> insert(@RequestBody @Valid CursoRequest request) {
         Curso curso = request.toModel();
         service.insert(curso);
-        return ResponseEntity.ok().body(curso);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(curso.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(curso);
     }
 
     @GetMapping

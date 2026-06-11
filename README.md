@@ -150,7 +150,7 @@ Evolução incremental do projeto, com cada passo desenvolvido em branch separad
 
 ### Fundamentos Spring Boot
 
-- [ ] **Passo 1** — Status codes e header `Location` no POST (`201 Created`)
+- [x] **Passo 1** — Status codes e header `Location` no POST (`201 Created`)
 - [ ] **Passo 2** — Tratamento global de exceções com `@ControllerAdvice`
 - [ ] **Passo 3** — Centralização do acesso a dados via Repository
 - [ ] **Passo 4** — Constructor injection em services e controllers
