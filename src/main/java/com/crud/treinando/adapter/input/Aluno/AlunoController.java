@@ -21,13 +21,11 @@ public class AlunoController {
 
     @PostMapping()
     public ResponseEntity<AlunoResponse> insert(@RequestBody @Valid AlunoRequest request) {
-        Aluno aluno = request.toModel(alunoService);
-        alunoService.insert(aluno);
-        AlunoResponse alunoResponse = new AlunoResponse(aluno);
+        AlunoResponse alunoResponse = alunoService.insert(request);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(aluno.getId())
+                .buildAndExpand(alunoResponse.getNome())
                 .toUri();
         return ResponseEntity.created(location).body(alunoResponse);
     }
@@ -46,7 +44,7 @@ public class AlunoController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<AlunoResponse> update(@PathVariable Long id, @RequestBody AlunoRequest request) {
-        AlunoResponse alunoResponse = new AlunoResponse(alunoService.update(id, request));
+        AlunoResponse alunoResponse = alunoService.update(id, request);
         return ResponseEntity.ok().body(alunoResponse);
     }
 

@@ -10,14 +10,16 @@ public class AlunoRequest {
 
     @NotBlank
     private String nome;
+
     @NotBlank
     private String matricula;
+
     @NotNull
     private Long idCurso;
 
     public AlunoRequest(@NotBlank String nome,
-                        @NotBlank String matricula,
-                        @NotNull Long idCurso) {
+            @NotBlank String matricula,
+            @NotNull Long idCurso) {
         this.nome = nome;
         this.matricula = matricula;
         this.idCurso = idCurso;
@@ -31,10 +33,8 @@ public class AlunoRequest {
         return idCurso;
     }
 
-    public Aluno toModel(AlunoService service) {
-        @NotNull Curso curso = service.find(Curso.class, idCurso);
-        return new Aluno(nome, matricula, curso);
+    public Aluno toModel(Curso curso) {
+        return new Aluno(this.nome, this.matricula, curso);
     }
-
 
 }
