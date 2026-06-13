@@ -1,10 +1,9 @@
 package com.crud.treinando.adapter.input.Aluno;
 
 import com.crud.treinando.adapter.output.Aluno.AlunoResponse;
-import com.crud.treinando.application.Aluno.AlunoService;
-import com.crud.treinando.domain.Aluno.Aluno;
+import com.crud.treinando.application.AlunoService;
+
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,8 +15,11 @@ import java.util.List;
 @RequestMapping(value = "/api/v1/alunos")
 public class AlunoController {
 
-    @Autowired
     private AlunoService alunoService;
+
+    public AlunoController(AlunoService alunoService) {
+        this.alunoService = alunoService;
+    }
 
     @PostMapping()
     public ResponseEntity<AlunoResponse> insert(@RequestBody @Valid AlunoRequest request) {

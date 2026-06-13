@@ -1,6 +1,5 @@
-package com.crud.treinando.domain.Professor;
+package com.crud.treinando.domain;
 
-import com.crud.treinando.domain.Curso.Curso;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

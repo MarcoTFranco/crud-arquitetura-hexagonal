@@ -1,7 +1,7 @@
 package com.crud.treinando.adapter.output.Aluno;
 
-import com.crud.treinando.domain.Aluno.Aluno;
-import com.crud.treinando.domain.Curso.Curso;
+import com.crud.treinando.domain.Aluno;
+import com.crud.treinando.domain.Curso;
 
 public class AlunoResponse {
 

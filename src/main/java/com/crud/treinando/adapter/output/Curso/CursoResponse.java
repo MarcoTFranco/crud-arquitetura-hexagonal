@@ -1,8 +1,8 @@
 package com.crud.treinando.adapter.output.Curso;
 
-import com.crud.treinando.domain.Curso.Curso;
-
 import java.math.BigDecimal;
+
+import com.crud.treinando.domain.Curso;
 
 public class CursoResponse {
 

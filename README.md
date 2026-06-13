@@ -152,8 +152,8 @@ Evolução incremental do projeto, com cada passo desenvolvido em branch separad
 
 - [x] **Passo 1** — Status codes e header `Location` no POST (`201 Created`)
 - [x] **Passo 2** — Tratamento global de exceções com `@ControllerAdvice`
-- [ ] **Passo 3** — Centralização do acesso a dados via Repository
-- [ ] **Passo 4** — Constructor injection em services e controllers
+- [x] **Passo 3** — Centralização do acesso a dados via Repository
+- [x] **Passo 4** — Constructor injection em services e controllers
 - [ ] **Passo 5** — Response DTOs desacoplados das entidades JPA
 - [ ] **Passo 6** — Paginação nos endpoints de listagem
 - [ ] **Passo 7** — Testes unitários com JUnit 5 + Mockito

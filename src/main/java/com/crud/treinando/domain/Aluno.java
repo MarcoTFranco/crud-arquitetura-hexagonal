@@ -1,6 +1,5 @@
-package com.crud.treinando.domain.Aluno;
+package com.crud.treinando.domain;
 
-import com.crud.treinando.domain.Curso.Curso;
 import jakarta.persistence.*;
 
 @Entity
