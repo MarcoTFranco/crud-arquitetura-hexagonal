@@ -1,18 +1,18 @@
 package com.crud.treinando.adapter.output.Aluno;
 
+import com.crud.treinando.adapter.output.Curso.CursoResponse;
 import com.crud.treinando.domain.Aluno;
-import com.crud.treinando.domain.Curso;
 
 public class AlunoResponse {
 
     private final String nome;
     private final String matricula;
-    private final Curso curso;
+    private final CursoResponse curso;
 
     public AlunoResponse(Aluno aluno) {
         this.nome = aluno.getNome();
         this.matricula = aluno.getMatricula();
-        this.curso = aluno.getCurso();
+        this.curso = new CursoResponse(aluno.getCurso());
     }
 
     public String getNome() {
@@ -23,7 +23,7 @@ public class AlunoResponse {
         return matricula;
     }
 
-    public Curso getCurso() {
+    public CursoResponse getCurso() {
         return curso;
     }
 }
