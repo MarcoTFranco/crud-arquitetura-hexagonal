@@ -1,8 +1,8 @@
 package com.crud.treinando.adapter.input.Aluno;
 
-import com.crud.treinando.application.Aluno.AlunoService;
-import com.crud.treinando.domain.Aluno.Aluno;
-import com.crud.treinando.domain.Curso.Curso;
+import com.crud.treinando.domain.Aluno;
+import com.crud.treinando.domain.Curso;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

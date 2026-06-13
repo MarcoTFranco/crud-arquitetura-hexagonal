@@ -1,10 +1,11 @@
 package com.crud.treinando.adapter.input.Curso;
 
-import com.crud.treinando.domain.Curso.Curso;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+
+import com.crud.treinando.domain.Curso;
 
 public class CursoRequest {
     @NotBlank

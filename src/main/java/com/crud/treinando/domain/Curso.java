@@ -1,6 +1,5 @@
-package com.crud.treinando.domain.Curso;
+package com.crud.treinando.domain;
 
-import com.crud.treinando.domain.Professor.Professor;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

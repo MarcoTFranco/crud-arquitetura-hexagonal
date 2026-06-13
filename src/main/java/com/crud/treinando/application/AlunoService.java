@@ -1,13 +1,13 @@
-package com.crud.treinando.application.Aluno;
+package com.crud.treinando.application;
 
 import com.crud.treinando.adapter.input.Aluno.AlunoRequest;
 import com.crud.treinando.adapter.output.Aluno.AlunoRepository;
 import com.crud.treinando.adapter.output.Aluno.AlunoResponse;
 import com.crud.treinando.adapter.output.Curso.CursoRepository;
 import com.crud.treinando.application.exception.ResourceNotFoundException;
-import com.crud.treinando.domain.Aluno.Aluno;
-import com.crud.treinando.domain.Curso.Curso;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.crud.treinando.domain.Aluno;
+import com.crud.treinando.domain.Curso;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +15,14 @@ import java.util.List;
 @Service
 public class AlunoService {
 
-    @Autowired
     private AlunoRepository alunoRepository;
 
-    @Autowired
     private CursoRepository cursoRepository;
+
+    public AlunoService(AlunoRepository alunoRepository, CursoRepository cursoRepository) {
+        this.alunoRepository = alunoRepository;
+        this.cursoRepository = cursoRepository;
+    }
 
     public AlunoResponse insert(AlunoRequest alunoRequest) {
         Curso curso = cursoRepository.findById(alunoRequest.getCurso())
