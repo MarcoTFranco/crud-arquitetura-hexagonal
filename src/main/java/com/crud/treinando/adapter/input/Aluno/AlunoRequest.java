@@ -1,8 +1,5 @@
 package com.crud.treinando.adapter.input.aluno;
 
-import com.crud.treinando.domain.Aluno;
-import com.crud.treinando.domain.Curso;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -29,12 +26,11 @@ public class AlunoRequest {
         return nome;
     }
 
-    public Long getCurso() {
+    public Long getIdCurso() {
         return idCurso;
     }
 
-    public Aluno toModel(Curso curso) {
-        return new Aluno(this.nome, this.matricula, curso);
+    public String getMatricula() {
+        return matricula;
     }
-
 }

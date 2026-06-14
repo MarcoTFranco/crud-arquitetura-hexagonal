@@ -171,7 +171,7 @@ Evolução incremental do projeto, com cada passo desenvolvido em branch separad
 
 ### Arquitetura Hexagonal de Verdade
 
-- [ ] **Passo 9** — Interfaces de porta (`UseCase` + `PersistencePort`) para inversão real de dependência — sem elas o projeto é apenas camadas, não hexagonal
+- [x] **Passo 9** — Interfaces de porta (`UseCase` + `PersistencePort`) para inversão real de dependência — sem elas o projeto é apenas camadas, não hexagonal
 - [ ] **Passo 10** — Exceções de domínio customizadas (`ResourceNotFoundException`, `BusinessException`) para substituir `Assert` e erros genéricos nos Services
 - [ ] **Passo 11** — Completar CRUD de `Curso` (faltam `findById`, `update`, `delete`) e corrigir `CursoController` para retornar `CursoResponse` em vez da entidade JPA diretamente
 - [ ] **Passo 12** — Implementar `Professor` do zero: Controller, Service, portas e CRUD completo (entidade existe no domínio mas não tem nenhum endpoint)
