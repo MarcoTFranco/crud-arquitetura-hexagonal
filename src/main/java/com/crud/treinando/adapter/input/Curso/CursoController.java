@@ -1,6 +1,6 @@
-package com.crud.treinando.adapter.input.Curso;
+package com.crud.treinando.adapter.input.curso;
 
-import com.crud.treinando.application.CursoService;
+import com.crud.treinando.application.service.CursoService;
 import com.crud.treinando.domain.Curso;
 
 import jakarta.validation.Valid;

@@ -1,9 +1,9 @@
-package com.crud.treinando.application;
+package com.crud.treinando.application.service;
 
-import com.crud.treinando.adapter.input.Aluno.AlunoRequest;
-import com.crud.treinando.adapter.output.Aluno.AlunoRepository;
-import com.crud.treinando.adapter.output.Aluno.AlunoResponse;
-import com.crud.treinando.adapter.output.Curso.CursoRepository;
+import com.crud.treinando.adapter.input.aluno.AlunoRequest;
+import com.crud.treinando.adapter.output.aluno.AlunoRepository;
+import com.crud.treinando.adapter.output.aluno.AlunoResponse;
+import com.crud.treinando.adapter.output.curso.CursoRepository;
 import com.crud.treinando.application.exception.ResourceNotFoundException;
 import com.crud.treinando.domain.Aluno;
 import com.crud.treinando.domain.Curso;

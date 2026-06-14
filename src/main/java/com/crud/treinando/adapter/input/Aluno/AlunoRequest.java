@@ -1,4 +1,4 @@
-package com.crud.treinando.adapter.input.Aluno;
+package com.crud.treinando.adapter.input.aluno;
 
 import com.crud.treinando.domain.Aluno;
 import com.crud.treinando.domain.Curso;

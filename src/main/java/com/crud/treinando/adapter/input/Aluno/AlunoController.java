@@ -1,7 +1,7 @@
-package com.crud.treinando.adapter.input.Aluno;
+package com.crud.treinando.adapter.input.aluno;
 
-import com.crud.treinando.adapter.output.Aluno.AlunoResponse;
-import com.crud.treinando.application.AlunoService;
+import com.crud.treinando.adapter.output.aluno.AlunoResponse;
+import com.crud.treinando.application.service.AlunoService;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class AlunoController {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(alunoResponse.getNome())
+                .buildAndExpand(alunoResponse.getId())
                 .toUri();
         return ResponseEntity.created(location).body(alunoResponse);
     }
@@ -45,7 +45,7 @@ public class AlunoController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<AlunoResponse> update(@PathVariable Long id, @RequestBody AlunoRequest request) {
+    public ResponseEntity<AlunoResponse> update(@PathVariable Long id, @RequestBody @Valid AlunoRequest request) {
         AlunoResponse alunoResponse = alunoService.update(id, request);
         return ResponseEntity.ok().body(alunoResponse);
     }

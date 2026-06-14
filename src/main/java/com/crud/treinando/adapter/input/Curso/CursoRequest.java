@@ -1,4 +1,4 @@
-package com.crud.treinando.adapter.input.Curso;
+package com.crud.treinando.adapter.input.curso;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

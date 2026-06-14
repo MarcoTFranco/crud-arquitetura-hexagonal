@@ -33,6 +33,16 @@ o núcleo de negócio dos detalhes de infraestrutura.
 docker-compose up --build
 ```
 
+> **Atenção:** Se você tiver MySQL instalado localmente, a porta `3306` já estará em uso
+> e o container do banco não vai subir. Nesse caso, edite o `docker-compose.yml` e troque
+> a porta exposta:
+> ```yaml
+> ports:
+>   - "3307:3306"   # era 3306:3306
+> ```
+> A aplicação continua funcionando normalmente — só a porta exposta ao host muda.
+
+
 A API estará disponível em `http://localhost:8080`.
 
 ### Localmente

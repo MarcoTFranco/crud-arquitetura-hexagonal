@@ -1,9 +1,8 @@
-package com.crud.treinando.application;
+package com.crud.treinando.application.service;
 
-import com.crud.treinando.adapter.output.Curso.CursoRepository;
+import com.crud.treinando.adapter.output.curso.CursoRepository;
 import com.crud.treinando.domain.Curso;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.crud.treinando.adapter.output.Aluno;
+package com.crud.treinando.adapter.output.aluno;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
