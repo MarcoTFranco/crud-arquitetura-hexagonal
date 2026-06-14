@@ -1,10 +1,9 @@
 package com.crud.treinando.application.service;
 
-import com.crud.treinando.adapter.input.aluno.AlunoRequest;
-import com.crud.treinando.adapter.output.aluno.AlunoRepository;
-import com.crud.treinando.adapter.output.aluno.AlunoResponse;
-import com.crud.treinando.adapter.output.curso.CursoRepository;
 import com.crud.treinando.application.exception.ResourceNotFoundException;
+import com.crud.treinando.application.port.in.AlunoUseCase;
+import com.crud.treinando.application.port.out.AlunoPersistencePort;
+import com.crud.treinando.application.port.out.CursoPersistencePort;
 import com.crud.treinando.domain.Aluno;
 import com.crud.treinando.domain.Curso;
 
@@ -13,55 +12,54 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AlunoService {
+public class AlunoService implements AlunoUseCase {
 
-    private AlunoRepository alunoRepository;
+    private AlunoPersistencePort alunoPersistencePort;
 
-    private CursoRepository cursoRepository;
+    private CursoPersistencePort cursoPersistencePort;
 
-    public AlunoService(AlunoRepository alunoRepository, CursoRepository cursoRepository) {
-        this.alunoRepository = alunoRepository;
-        this.cursoRepository = cursoRepository;
+    public AlunoService(AlunoPersistencePort alunoPersistencePort, CursoPersistencePort cursoPersistencePort) {
+        this.alunoPersistencePort = alunoPersistencePort;
+        this.cursoPersistencePort = cursoPersistencePort;
     }
 
-    public AlunoResponse insert(AlunoRequest alunoRequest) {
-        Curso curso = cursoRepository.findById(alunoRequest.getCurso())
-                .orElseThrow(() -> new ResourceNotFoundException("Curso com id " + alunoRequest.getCurso() + " não encontrado."));
-        Aluno aluno = alunoRequest.toModel(curso);
-        alunoRepository.save(aluno);
-        return new AlunoResponse(aluno);
+    @Override
+    public Aluno insert(String nome, String matricula, Long idCurso) {
+        Curso curso = cursoPersistencePort.findById(idCurso)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Curso com id " + idCurso + " não encontrado."));
+        Aluno aluno = new Aluno(nome, matricula, curso);
+        alunoPersistencePort.save(aluno);
+        return aluno;
     }
 
-    public AlunoResponse findById(Long id) {
-        return new AlunoResponse(alunoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Aluno com id " + id + " não encontrado.")));
-    }
-
-    public List<AlunoResponse> findAll() {
-        return alunoRepository.findAll()
-                .stream()
-                .map(AlunoResponse::new)
-                .toList();
-    }
-
-    public AlunoResponse update(Long id, AlunoRequest request) {
-        Aluno aluno = alunoRepository.findById(id)
+    @Override
+    public Aluno findById(Long id) {
+        return alunoPersistencePort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Aluno com id " + id + " não encontrado."));
-        updateData(request, aluno);
-        alunoRepository.save(aluno);
-        return new AlunoResponse(aluno);
     }
 
-    private void updateData(AlunoRequest request, Aluno aluno) {
-        Curso curso = cursoRepository.findById(request.getCurso())
-                .orElseThrow(() -> new ResourceNotFoundException("Curso com id " + request.getCurso() + " não encontrado."));
-        aluno.setNome(request.getNome());
+    @Override
+    public List<Aluno> findAll() {
+        return alunoPersistencePort.findAll();
+    }
+
+    @Override
+    public Aluno update(Long id, String nome, Long idCurso) {
+        Aluno aluno = alunoPersistencePort.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Aluno com id " + id + " não encontrado."));
+        Curso curso = cursoPersistencePort.findById(idCurso)
+                .orElseThrow(() -> new ResourceNotFoundException("Curso com id " + idCurso + " não encontrado."));
+        aluno.setNome(nome);
         aluno.setCurso(curso);
+        alunoPersistencePort.save(aluno);
+        return aluno;
     }
 
+    @Override
     public void delete(Long id) {
-        Aluno aluno = alunoRepository.findById(id)
+        Aluno aluno = alunoPersistencePort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Aluno com id " + id + " não encontrado."));
-        alunoRepository.delete(aluno);
+        alunoPersistencePort.delete(aluno);
     }
 }

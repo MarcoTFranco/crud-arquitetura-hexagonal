@@ -1,8 +1,6 @@
 package com.crud.treinando.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
@@ -26,9 +24,7 @@ public class Curso {
     public Curso() {
     }
 
-    public Curso(@NotBlank String nome,
-                 @NotBlank String descricao,
-                 @NotNull BigDecimal preco) {
+    public Curso(String nome, String descricao, BigDecimal preco) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;

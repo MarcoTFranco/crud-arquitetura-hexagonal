@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
-import com.crud.treinando.domain.Curso;
-
 public class CursoRequest {
     @NotBlank
     private String nome;
@@ -51,9 +49,5 @@ public class CursoRequest {
 
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
-    }
-
-    public Curso toModel() {
-        return new Curso(nome, descricao, preco);
     }
 }
