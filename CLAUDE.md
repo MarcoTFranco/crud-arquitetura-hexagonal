@@ -18,11 +18,19 @@ CRUD de alunos e cursos construído com Java 17 e Spring Boot 3, em processo de 
 
 ```
 com.crud.treinando/
-├── domain/              # Entidades de negócio (Aluno, Curso, Professor)
-├── application/         # Services (casos de uso)
+├── domain/                  # Entidades de negócio (Aluno, Curso, Professor)
+├── application/
+│   ├── port/
+│   │   ├── in/              # Interfaces de entrada (Use Cases)
+│   │   └── out/             # Interfaces de saída (Persistence Ports)
+│   └── service/             # Implementações dos casos de uso
 └── adapter/
-    ├── input/           # Controllers + Request DTOs
-    └── output/          # Repositories + Response DTOs
+    ├── input/               # Controllers + Request DTOs
+    │   ├── aluno/
+    │   └── curso/
+    └── output/              # Repositories + Response DTOs
+        ├── aluno/
+        └── curso/
 ```
 
 ---

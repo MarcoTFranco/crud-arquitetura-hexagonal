@@ -62,16 +62,25 @@ implementações externas (HTTP, banco de dados):
 
 ```
 src/main/java/com/crud/treinando/
-├── domain/          # Entidades de negócio — sem dependências externas
-├── application/     # Serviços e casos de uso da aplicação
+├── domain/                  # Entidades de negócio — sem dependências externas
+├── application/
+│   ├── port/
+│   │   ├── in/              # Interfaces de entrada (Use Cases)
+│   │   └── out/             # Interfaces de saída (Persistence Ports)
+│   └── service/             # Implementações dos casos de uso
 └── adapter/
-    ├── input/       # Controllers e DTOs de entrada (driving adapters)
-    └── output/      # Repositories e DTOs de saída  (driven adapters)
+    ├── input/               # Controllers e Request DTOs (driving adapters)
+    │   ├── aluno/
+    │   └── curso/
+    └── output/              # Repositories e Response DTOs (driven adapters)
+        ├── aluno/
+        └── curso/
+
 ```
 
-**Decisão de design:** o `domain` não conhece Spring, JPA nem HTTP.
-Isso permite testar a lógica de negócio de forma isolada e trocar
-a camada de persistência ou de transporte sem afetar o núcleo.
+**Decisão de design:** o `domain` e o `application` não conhecem Spring, JPA nem HTTP.
+O `application` depende apenas de interfaces — nunca de implementações concretas de adapter.
+
 
 ---
 
@@ -129,7 +138,7 @@ na assinatura e respeita a imutabilidade dos campos.
 ### Interfaces de porta (Ports & Adapters)
 
 Cada camada se comunica através de interfaces, nunca de implementações concretas.
-O `Service` dependerá de `PersistencePort`, não de `JpaRepository` diretamente —
+O `Service` depende de `PersistencePort`, não de `JpaRepository` diretamente —
 permitindo trocar a persistência sem tocar na lógica de negócio.
 
 ### DTOs em todas as camadas
@@ -171,7 +180,7 @@ Evolução incremental do projeto, com cada passo desenvolvido em branch separad
 
 ### Arquitetura Hexagonal de Verdade
 
-- [ ] **Passo 9** — Interfaces de porta (`UseCase` + `PersistencePort`) para inversão real de dependência — sem elas o projeto é apenas camadas, não hexagonal
+- [x] **Passo 9** — Interfaces de porta (`UseCase` + `PersistencePort`) para inversão real de dependência — sem elas o projeto é apenas camadas, não hexagonal
 - [ ] **Passo 10** — Exceções de domínio customizadas (`ResourceNotFoundException`, `BusinessException`) para substituir `Assert` e erros genéricos nos Services
 - [ ] **Passo 11** — Completar CRUD de `Curso` (faltam `findById`, `update`, `delete`) e corrigir `CursoController` para retornar `CursoResponse` em vez da entidade JPA diretamente
 - [ ] **Passo 12** — Implementar `Professor` do zero: Controller, Service, portas e CRUD completo (entidade existe no domínio mas não tem nenhum endpoint)
