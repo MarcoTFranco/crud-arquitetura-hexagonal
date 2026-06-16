@@ -13,4 +13,6 @@ public interface AlunoPersistencePort {
     Aluno save(Aluno aluno);
 
     void delete(Aluno aluno);
+
+    boolean existsByMatricula(String matricula);
 }
