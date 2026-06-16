@@ -1,5 +1,6 @@
 package com.crud.treinando.application.service;
 
+import com.crud.treinando.application.exception.BusinessException;
 import com.crud.treinando.application.exception.ResourceNotFoundException;
 import com.crud.treinando.application.port.in.AlunoUseCase;
 import com.crud.treinando.application.port.out.AlunoPersistencePort;
@@ -28,6 +29,9 @@ public class AlunoService implements AlunoUseCase {
         Curso curso = cursoPersistencePort.findById(idCurso)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Curso com id " + idCurso + " não encontrado."));
+        if (alunoPersistencePort.existsByMatricula(matricula)) {
+            throw new BusinessException("Ja existe uma pessoa com essa matricula");
+        }
         Aluno aluno = new Aluno(nome, matricula, curso);
         alunoPersistencePort.save(aluno);
         return aluno;

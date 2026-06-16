@@ -176,12 +176,12 @@ Evolução incremental do projeto, com cada passo desenvolvido em branch separad
 - [x] **Passo 5** — Response DTOs desacoplados das entidades JPA
 - [ ] **Passo 6** — Paginação nos endpoints de listagem
 - [ ] **Passo 7** — Testes unitários com JUnit 5 + Mockito
-- [ ] **Passo 8** — Revisão e limpeza de dependências do `pom.xml`
+- [x] **Passo 8** — Revisão e limpeza de dependências do `pom.xml`
 
 ### Arquitetura Hexagonal de Verdade
 
 - [x] **Passo 9** — Interfaces de porta (`UseCase` + `PersistencePort`) para inversão real de dependência — sem elas o projeto é apenas camadas, não hexagonal
-- [ ] **Passo 10** — Exceções de domínio customizadas (`ResourceNotFoundException`, `BusinessException`) para substituir `Assert` e erros genéricos nos Services
+- [x] **Passo 10** — Exceções de domínio customizadas (`ResourceNotFoundException`, `BusinessException`) para substituir `Assert` e erros genéricos nos Services
 - [ ] **Passo 11** — Completar CRUD de `Curso` (faltam `findById`, `update`, `delete`) e corrigir `CursoController` para retornar `CursoResponse` em vez da entidade JPA diretamente
 - [ ] **Passo 12** — Implementar `Professor` do zero: Controller, Service, portas e CRUD completo (entidade existe no domínio mas não tem nenhum endpoint)
 
