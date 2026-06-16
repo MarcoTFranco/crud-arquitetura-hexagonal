@@ -1,4 +1,4 @@
-package com.crud.treinando.adapter.output.curso;
+package com.crud.treinando.adapter.output;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

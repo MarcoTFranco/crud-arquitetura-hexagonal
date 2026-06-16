@@ -1,6 +1,5 @@
 package com.crud.treinando.adapter.input.aluno;
 
-import com.crud.treinando.adapter.output.aluno.AlunoResponse;
 import com.crud.treinando.application.port.in.AlunoUseCase;
 
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.crud.treinando.adapter.output.curso;
+package com.crud.treinando.adapter.input.curso;
 
 import java.math.BigDecimal;
 

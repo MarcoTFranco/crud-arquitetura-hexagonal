@@ -1,6 +1,5 @@
 package com.crud.treinando.adapter.input.curso;
 
-import com.crud.treinando.adapter.output.curso.CursoResponse;
 import com.crud.treinando.application.port.in.CursoUseCase;
 
 import jakarta.validation.Valid;

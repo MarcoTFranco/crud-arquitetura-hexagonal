@@ -1,6 +1,6 @@
-package com.crud.treinando.adapter.output.aluno;
+package com.crud.treinando.adapter.input.aluno;
 
-import com.crud.treinando.adapter.output.curso.CursoResponse;
+import com.crud.treinando.adapter.input.curso.CursoResponse;
 import com.crud.treinando.domain.Aluno;
 
 public class AlunoResponse {
