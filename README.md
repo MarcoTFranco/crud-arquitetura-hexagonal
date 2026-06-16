@@ -55,35 +55,6 @@ Configure o banco no `application.properties` e execute:
 
 ---
 
-## Arquitetura
-
-O projeto segue a arquitetura hexagonal, isolando o domínio de negócio das
-implementações externas (HTTP, banco de dados):
-
-```
-src/main/java/com/crud/treinando/
-├── domain/                  # Entidades de negócio — sem dependências externas
-├── application/
-│   ├── port/
-│   │   ├── in/              # Interfaces de entrada (Use Cases)
-│   │   └── out/             # Interfaces de saída (Persistence Ports)
-│   └── service/             # Implementações dos casos de uso
-└── adapter/
-    ├── input/               # Controllers e Request DTOs (driving adapters)
-    │   ├── aluno/
-    │   └── curso/
-    └── output/              # Repositories e Response DTOs (driven adapters)
-        ├── aluno/
-        └── curso/
-
-```
-
-**Decisão de design:** o `domain` e o `application` não conhecem Spring, JPA nem HTTP.
-O `application` depende apenas de interfaces — nunca de implementações concretas de adapter.
-
-
----
-
 ## Endpoints
 
 ### Alunos — `/api/v1/alunos`
