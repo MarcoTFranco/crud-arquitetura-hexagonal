@@ -4,10 +4,11 @@ import com.crud.treinando.application.port.in.CursoUseCase;
 import com.crud.treinando.application.port.out.CursoPersistencePort;
 import com.crud.treinando.domain.Curso;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 public class CursoService implements CursoUseCase {
@@ -26,7 +27,7 @@ public class CursoService implements CursoUseCase {
     }
 
     @Override
-    public List<Curso> findAll() {
-        return repository.findAll();
+    public Page<Curso> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }

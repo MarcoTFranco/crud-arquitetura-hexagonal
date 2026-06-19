@@ -3,12 +3,16 @@ package com.crud.treinando.adapter.input.aluno;
 import com.crud.treinando.application.port.in.AlunoUseCase;
 
 import jakarta.validation.Valid;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController()
 @RequestMapping(value = "/api/v1/alunos")
@@ -39,9 +43,9 @@ public class AlunoController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<AlunoResponse>> findAll() {
-        List<AlunoResponse> list = alunoUseCase.findAll().stream().map(AlunoResponse::new).toList();
-        return ResponseEntity.ok().body(list);
+    public ResponseEntity<Page<AlunoResponse>> findAll(@PageableDefault(size = 10, sort = "nome", direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<AlunoResponse> page = alunoUseCase.findAll(pageable).map(AlunoResponse::new);
+        return ResponseEntity.ok().body(page);
     }
 
     @PutMapping(value = "/{id}")

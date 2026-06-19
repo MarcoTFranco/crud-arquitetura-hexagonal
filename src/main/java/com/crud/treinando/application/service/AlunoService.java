@@ -8,9 +8,10 @@ import com.crud.treinando.application.port.out.CursoPersistencePort;
 import com.crud.treinando.domain.Aluno;
 import com.crud.treinando.domain.Curso;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class AlunoService implements AlunoUseCase {
@@ -44,8 +45,8 @@ public class AlunoService implements AlunoUseCase {
     }
 
     @Override
-    public List<Aluno> findAll() {
-        return alunoPersistencePort.findAll();
+    public Page<Aluno> findAll(Pageable pageable) {
+        return alunoPersistencePort.findAll(pageable);
     }
 
     @Override
