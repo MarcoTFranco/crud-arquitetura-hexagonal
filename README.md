@@ -146,7 +146,7 @@ Evolução incremental do projeto, com cada passo desenvolvido em branch separad
 - [x] **Passo 4** — Constructor injection em services e controllers
 - [x] **Passo 5** — Response DTOs desacoplados das entidades JPA
 - [x] **Passo 6** — Paginação nos endpoints de listagem
-- [ ] **Passo 7** — Testes unitários com JUnit 5 + Mockito
+- [x] **Passo 7** — Testes unitários com JUnit 5 + Mockito
 - [x] **Passo 8** — Revisão e limpeza de dependências do `pom.xml`
 
 ### Arquitetura Hexagonal de Verdade
