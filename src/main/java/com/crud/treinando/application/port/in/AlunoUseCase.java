@@ -1,6 +1,8 @@
 package com.crud.treinando.application.port.in;
 
-import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.crud.treinando.domain.Aluno;
 
@@ -10,7 +12,7 @@ public interface AlunoUseCase {
 
     Aluno findById(Long id);
 
-    List<Aluno> findAll();
+    Page<Aluno> findAll(Pageable pageable);
 
     Aluno update(Long id, String nome, Long idCurso);
 
